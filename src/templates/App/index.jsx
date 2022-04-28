@@ -1,13 +1,28 @@
-import * as Styled from './styles'
+//* REACT ROUTER
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+//* COMPONENTS
+import Footer from '../../components/layout/Footer';
+import Navbar from '../../components/layout/Navbar';
+import About from '../../components/pages/About/inde';
+import Home from '../../components/pages/Home';
+//* STYLED COMPONENTS
+import * as Styled from './styles';
 
 function App() {
-    return (
-      <div className="App">
-          <Styled.Wrapper background='red'>
-        <h1>mini blog</h1>
-          </Styled.Wrapper>
-      </div>
-    );
-  }
-  
-  export default App;
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Styled.Container>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </Styled.Container>
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
