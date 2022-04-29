@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 *{
@@ -49,7 +49,7 @@ form {
 label{
     display: flex;
     flex-direction: column;
-    margin-bottom: 1px;
+    margin-bottom: 1em;
 }
 
 label span {
@@ -65,8 +65,64 @@ input-security, textarea{
     padding: 0.8em 0;
     background-color: transparent;
 }
+
+button[disabled]{
+    background-color: #aaa;
+}
+
+.container .error{
+    color:#721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 5px;
+    border-radius: 5px;
+}
 `;
 
+export const MsgError = styled.div`
+  margin-top: 1em;
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 5px;
+  border-radius: 5px;
+`;
 
+export const Btn = styled.button`
+  background-color: #1a8918;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 120px;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1em;
 
+  &:hover {
+    background-color: #0f730c;
+    color: #fff;
+  }
+`;
+
+export const BtnDark = styled(Btn)`
+  background-color: #000;
+  border-radius: 0;
+`;
+export const BtnOutline = styled(Btn)`
+  background-color: transparent;
+  border-radius: 0;
+  border: 1px solid #000;
+  padding: 7px 30px;
+
+  &:hover {
+    background-color: #000;
+  }
+`;
+export const BtnDanger = styled(Btn)`
+  &:hover {
+    background-color: #dc3545;
+  }
+`;
 export default GlobalStyles;
