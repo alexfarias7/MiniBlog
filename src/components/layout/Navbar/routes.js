@@ -5,13 +5,18 @@ export const routes = [
         id:1
     },
     {
-        path:'/about',
-        name:'Sobre',
+        path:'/login',
+        name:'Entrar',
         id:2
     },
     {
-        path:'/contact',
-        name:'Contato',
+        path:'/register',
+        name:'Cadastrar',
         id:3
+    },
+    {
+        path:'/about',
+        name:'Sobre',
+        id:4
     },
 ]

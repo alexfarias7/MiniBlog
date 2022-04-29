@@ -1,11 +1,11 @@
 export const theme ={
     colors:{
-        mainColor:'#fbf',
+        mainColor:'#f6fcff',
         secondaryColor:'green'
     },
     fonts:{
         family:{
-
+        mainFont:"'Montserrat', sans-serif"
         },
         sizes:{
             
