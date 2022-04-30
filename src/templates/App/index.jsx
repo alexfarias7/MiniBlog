@@ -9,22 +9,26 @@ import Login from '../../components/pages/Login';
 import Register from '../../components/pages/Register';
 //* STYLED COMPONENTS
 import * as Styled from './styles';
+//* hooks
+import { AuthProvider } from '../../context/AuthContext';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Styled.Container>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </Styled.Container>
-        <Footer />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+          <Styled.Container>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </Styled.Container>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }
