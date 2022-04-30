@@ -14,5 +14,5 @@ export function useAuthValue() {
 
 AuthProvider.propTypes = {
   children: P.element.isRequired,
-  value: P.node.isRequired,
-};
+  value: P.instanceOf(Object).isRequired
+}

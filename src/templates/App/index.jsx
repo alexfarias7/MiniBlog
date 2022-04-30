@@ -1,5 +1,10 @@
 //* REACT ROUTER
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+//* FIREBASE
+import { onAuthStateChanged } from 'firebase/auth';
+//* HOOKS
+import { useState, useEffect } from 'react';
+import { useAuthentication } from '../../hooks/useAuthetication';
 //* COMPONENTS
 import Footer from '../../components/layout/Footer';
 import Navbar from '../../components/layout/Navbar';
@@ -9,13 +14,28 @@ import Login from '../../components/pages/Login';
 import Register from '../../components/pages/Register';
 //* STYLED COMPONENTS
 import * as Styled from './styles';
-//* hooks
+//* CONTEXT
 import { AuthProvider } from '../../context/AuthContext';
+import CreatePost from '../../components/pages/Createpost';
+import Dashboard from '../../components/pages/Dashboard';
 
 function App() {
+    const [user, setUser] = useState(undefined);
+    const { auth } = useAuthentication();
+  
+    const loadingUser = user === undefined;
+
+  console.log(user)
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [auth]);
+
+  if (loadingUser) return <p>carregando...</p>;
   return (
     <div className="App">
-      <AuthProvider>
+      <AuthProvider value={{user}}>
         <BrowserRouter>
           <Navbar />
           <Styled.Container>
@@ -24,6 +44,8 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/posts/create" element={<CreatePost />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </Styled.Container>
           <Footer />
