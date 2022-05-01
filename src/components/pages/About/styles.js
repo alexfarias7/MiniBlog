@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Btn } from '../../../styles/global';
 
 export const About = styled.div`
   text-align: center;

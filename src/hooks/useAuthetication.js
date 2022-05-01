@@ -22,10 +22,10 @@ import {
   
     function checkIfIsCancelled() {
       if (cancelled) {
-        return;
+        return
       }
     }
-  
+    //* Register
     const createUser = async (data) => {
       checkIfIsCancelled();
   
@@ -65,15 +65,21 @@ import {
   
    
     };
+
+    //* logout 
+
+    const logout =()=>{
+        checkIfIsCancelled()
+        signOut(auth)
+    }
   
-    useEffect(() => {
-      return () => setCancelled(true);
-    }, []);
+    useEffect(() => () => setCancelled(true), []);
   
     return {
       auth,
       createUser,
       error,
       loading,
+      logout,
     };
   };

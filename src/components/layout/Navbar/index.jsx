@@ -2,7 +2,7 @@
 import * as Styled from './styles';
 
 //* routes
-import { routes } from './routes';
+// import { routes } from './routes';
 
 //* hooks
 import { useAuthentication } from '../../../hooks/useAuthetication';
@@ -11,6 +11,7 @@ import { useAuthValue } from '../../../context/AuthContext';
 function Navbar() {
 
   const { user } = useAuthValue();
+  const {logout} = useAuthentication()
   console.log(user)
   
 
@@ -48,6 +49,11 @@ function Navbar() {
         )}
 
         <li><Styled.NavActive to="/about">Sobre</Styled.NavActive></li>
+        {user && (
+            <li>
+                <button onClick={logout}> Sair</button>
+            </li>
+        )}
       </Styled.LinksLists>
     </Styled.Navbar>
   );
