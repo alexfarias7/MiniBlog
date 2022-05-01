@@ -58,7 +58,7 @@ label span {
     text-align: left;
 }
 
-input-security, textarea{
+input, textarea{
     box-sizing: border-box;
     border: none;
     border-bottom: 1px solid #ccc;
