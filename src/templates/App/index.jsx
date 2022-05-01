@@ -20,12 +20,12 @@ import CreatePost from '../../components/pages/Createpost';
 import Dashboard from '../../components/pages/Dashboard';
 
 function App() {
-    const [user, setUser] = useState(undefined);
-    const { auth } = useAuthentication();
-  
-    const loadingUser = user === undefined;
+  const [user, setUser] = useState(undefined);
+  const { auth } = useAuthentication();
 
-  console.log(user)
+  const loadingUser = user === undefined;
+
+  console.log(user);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -35,17 +35,29 @@ function App() {
   if (loadingUser) return <p>carregando...</p>;
   return (
     <div className="App">
-      <AuthProvider value={{user}}>
+      <AuthProvider value={{ user }}>
         <BrowserRouter>
           <Navbar />
           <Styled.Container>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/posts/create" element={<CreatePost />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/register"
+                element={!user ? <Register /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/posts/create"
+                element={user ? <CreatePost /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/dashboard"
+                element={user ? <Dashboard /> : <Navigate to="/login" />}
+              />
             </Routes>
           </Styled.Container>
           <Footer />
