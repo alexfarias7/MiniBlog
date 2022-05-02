@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+//* hooks
 import { useNavigate } from 'react-router-dom';
-
 import { useAuthValue } from '../../../context/AuthContext';
+import { useInsertDocument } from '../../../hooks/useInsertDocument';
 
 import * as Styled from './styles';
+import * as StyledButton from '../../../styles/global';
 
 function CreatePost() {
   const [title, setTitle] = useState('');
@@ -13,8 +15,44 @@ function CreatePost() {
   const [tags, setTags] = useState([]);
   const [formError, setFormError] = useState('');
 
+  const { user } = useAuthValue();
+  const { insertDocument, response } = useInsertDocument('posts');
+
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormError('');
+
+    //* valiadate image URL
+
+    try {
+         new URL(image);
+    } catch (error) {
+      setFormError('A imagem precisa ser uma URL.');
+    }
+
+    //* Criar arrays de tags
+    const tagsArray = tags.split(',').map((tag)=>tag.trim().toLowerCase())
+    //* checar todos os valores
+    if (!title || !image || !tags || !body){
+        setFormError('Por favor , preencha todos os campos')
+    }
+
+
+
+    if (formError) return;
+
+    insertDocument({
+      title,
+      image,
+      body,
+      tagsArray,
+      uid: user.uid,
+      createdBy: user.displayName,
+    });
+
+    //* redirect to home page
+    navigate('/')
   };
 
   return (
@@ -37,7 +75,7 @@ function CreatePost() {
         <label htmlFor="img">
           <span>Imagem:</span>
           <input
-            type="text"
+            type="url"
             name="img"
             required
             placeholder="insira uma imagem para o post"
@@ -68,23 +106,22 @@ function CreatePost() {
           />
         </label>
 
-        <Styled.BtnCreatePost type="submit" className="btn">
+        {!response.loading && (
+          <Styled.BtnCreatePost type="submit" className="btn">
             Cadastrar
           </Styled.BtnCreatePost>
-
-      {/*   {!loading && (
-          <StyledButton.Btn type="submit" className="btn">
-            Cadastrar
-          </StyledButton.Btn>
         )}
 
-        {loading && (
-          <StyledButton.Btn type="submit" className="btn" disabled>
+        {response.loading && (
+          <Styled.BtnCreatePost type="submit" disabled>
             Aguarde...
-          </StyledButton.Btn>
+          </Styled.BtnCreatePost>
         )}
 
-        {error && <StyledButton.MsgError> {error}</StyledButton.MsgError>} */}
+        {response.error && <Styled.BtnError> {response.error}</Styled.BtnError>}
+        {formError && (
+          <StyledButton.MsgError> {formError}</StyledButton.MsgError>
+        )}
       </form>
     </Styled.CreatePost>
   );
