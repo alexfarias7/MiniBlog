@@ -6,10 +6,13 @@ import { useState } from 'react';
 
 //* css
 import * as Styled from './styles';
+import { useFetchDocuments } from '../../../hooks/useFetchDocument';
+
+import PostDetails from '../../layout/PostsDetails';
 
 function Home() {
   const [query, setQuery] = useState('');
-  const [posts] = useState([])
+  const { documents:posts, loading} = useFetchDocuments("posts")
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,14 +24,16 @@ function Home() {
       <Styled.SearchForm onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="busque por tags dsejadas..."
+          placeholder="busque por tags desejadas..."
           onChange={(e) => setQuery(e.target.value)}
         />
         <Styled.BtnDarkHome type="submit"> Pesquisar</Styled.BtnDarkHome>
       </Styled.SearchForm>
 
       <div>
-          <h1>Posts...</h1>
+          {loading && <p>Carregando...</p>}
+        
+          {posts && posts.map((post) => <PostDetails key={post.id} post={post} />)}
           {
               posts && posts.length ===0 && (
                   <Styled.NoPost>
