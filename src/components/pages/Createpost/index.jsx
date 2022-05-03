@@ -58,7 +58,7 @@ function CreatePost() {
   return (
     <Styled.CreatePost>
       <h2>Criar Post</h2>
-      <p>Escreva spbre o que quer compartilhar</p>
+      <p>Escreva sobre o que quer compartilhar</p>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">
@@ -108,7 +108,7 @@ function CreatePost() {
 
         {!response.loading && (
           <Styled.BtnCreatePost type="submit" className="btn">
-            Cadastrar
+            Criar
           </Styled.BtnCreatePost>
         )}
 

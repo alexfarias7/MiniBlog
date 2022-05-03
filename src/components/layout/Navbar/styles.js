@@ -8,6 +8,7 @@ export const Navbar = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0.5em 2em;
+ 
 `;
 export const Brand = styled(NavLink)`
   font-size: 1.2em;

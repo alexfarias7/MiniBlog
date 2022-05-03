@@ -13,6 +13,8 @@ import Home from '../../components/pages/Home';
 import Login from '../../components/pages/Login';
 import Register from '../../components/pages/Register';
 import Search from '../../components/pages/Search';
+import Post from '../../components/pages/Post';
+
 //* STYLED COMPONENTS
 import * as Styled from './styles';
 //* CONTEXT
@@ -26,7 +28,6 @@ function App() {
 
   const loadingUser = user === undefined;
 
-  console.log(user);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -44,6 +45,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/search" element={<Search />} />
+              <Route path='/posts/:id' element={<Post/>} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
