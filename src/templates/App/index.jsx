@@ -12,6 +12,7 @@ import About from '../../components/pages/About/inde';
 import Home from '../../components/pages/Home';
 import Login from '../../components/pages/Login';
 import Register from '../../components/pages/Register';
+import Search from '../../components/pages/Search';
 //* STYLED COMPONENTS
 import * as Styled from './styles';
 //* CONTEXT
@@ -42,6 +43,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/search" element={<Search />} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}

@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 
 import {Link} from 'react-router-dom'
@@ -7,7 +8,7 @@ import { BtnDark } from '../../../styles/global';
 export const BtnDarkHome = styled(BtnDark)`
 
 &:hover{
-    background-color: #fefefe;
+    background-color: #808080;
     color:#000;
     transition: 0.5s;
 }
