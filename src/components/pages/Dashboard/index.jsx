@@ -1,5 +1,6 @@
 import { useAuthValue } from '../../../context/AuthContext';
 import { useFetchDocuments } from '../../../hooks/useFetchDocument';
+import { useDeleteDocument } from '../../../hooks/useDeleteDocument';
 
 import * as Styled from './styles';
 
@@ -7,8 +8,8 @@ function Dashboard() {
   const { user } = useAuthValue();
   const { uid } = user;
   const { documents: posts, loading } = useFetchDocuments('posts', null, uid);
-
-  const deleteDocument = (id) => {};
+ 
+  const {deleteDocument} = useDeleteDocument('posts')
   if (loading) return <p>Carregando...</p>
   return (
     <Styled.Dashboard>
