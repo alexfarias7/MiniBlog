@@ -14,13 +14,14 @@ import Login from '../../components/pages/Login';
 import Register from '../../components/pages/Register';
 import Search from '../../components/pages/Search';
 import Post from '../../components/pages/Post';
+import CreatePost from '../../components/pages/Createpost';
+import Dashboard from '../../components/pages/Dashboard';
+import EditPost from '../../components/pages/EditPost';
 
 //* STYLED COMPONENTS
 import * as Styled from './styles';
 //* CONTEXT
 import { AuthProvider } from '../../context/AuthContext';
-import CreatePost from '../../components/pages/Createpost';
-import Dashboard from '../../components/pages/Dashboard';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -45,7 +46,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/search" element={<Search />} />
-              <Route path='/posts/:id' element={<Post/>} />
+              <Route path="/posts/:id" element={<Post />} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
@@ -53,6 +54,10 @@ function App() {
               <Route
                 path="/register"
                 element={!user ? <Register /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/posts/edit/:id"
+                element={user ? <EditPost /> : <Navigate to="/login" />}
               />
               <Route
                 path="/posts/create"
